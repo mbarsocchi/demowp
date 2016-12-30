@@ -92,9 +92,9 @@ VALUES
 
         $htaccessFilename = BASE_PATH . $this->name . DIRECTORY_SEPARATOR . ".htaccess";
         $content = file_get_contents($htaccessFilename);
-        $pattern = "/RewriteBase \/.+/i";
+        $pattern = "/RewriteBase \/.*/i";
         $content = preg_replace($pattern, "RewriteBase /" . $this->name, $content);
-        $pattern = "/RewriteRule . \/.+\//i";
+        $pattern = "/RewriteRule . \/.*\//i";
         $content = preg_replace($pattern, "RewriteRule . /" . $this->name . "/", $content);
         file_put_contents($htaccessFilename, $content);
     }
