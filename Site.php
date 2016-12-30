@@ -80,13 +80,13 @@ VALUES
     function migrateWp() {
         $wpconfigFilename = BASE_PATH . $this->name . DIRECTORY_SEPARATOR . "wp-config.php";
         $content = file_get_contents($wpconfigFilename);
-        $pattern = "/define\('DB_NAME', '.+'\);/i";
+        $pattern = "/define\('DB_NAME', '.*'\);/i";
         $content = preg_replace($pattern, "define('DB_NAME', '" . $this->dbName . "');", $content);
-        $pattern = "/define\('DB_HOST', '.+'\);/i";
+        $pattern = "/define\('DB_HOST', '.*'\);/i";
         $content = preg_replace($pattern, "define('DB_HOST', '" . MYSQL_HOST . "');", $content);
-        $pattern = "/define\('DB_USER', '.+'\);/i";
+        $pattern = "/define\('DB_USER', '.*'\);/i";
         $content = preg_replace($pattern, "define('DB_USER', '" . MYSQL_USER_NAME . "');", $content);
-        $pattern = "/define\('DB_PASSWORD', '.+'\);/i";
+        $pattern = "/define\('DB_PASSWORD', '.*'\);/i";
         $content = preg_replace($pattern, "define('DB_PASSWORD', '" . MYSQL_PASSWORD . "');", $content);
         file_put_contents($wpconfigFilename, $content);
 
