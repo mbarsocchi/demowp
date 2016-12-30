@@ -7,6 +7,7 @@ $p = new ProcessManager();
 $procRun = $p->getProceRunning("svn");
 $procInDb = $p->getProcInDb();
 $data['running'] = array();
+$data['reload']=false;
 foreach ($procInDb as $pid => $site) {
     if (in_array($pid, $procRun)) {
         $data['running'][] = $site;
@@ -17,6 +18,7 @@ foreach ($procInDb as $pid => $site) {
             $site->cleanFiles();
         }
         $site->removeProcessRunning($pid);
+        $data['reload'] = true;
     }
 }
 header('content-type: application/json; charset=utf-8');

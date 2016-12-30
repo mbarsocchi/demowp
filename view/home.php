@@ -3,6 +3,7 @@
     <head>
         <title>Demo view</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     </head>
     <body>
         <?php if ($site) { ?>
@@ -15,7 +16,7 @@
                                 <?php echo $input; ?>
                             <?php } ?>
                         </td>
-                        <?php if (isset($running) && in_array($input,$running)) { ?>
+                        <?php if (isset($running) && in_array($input, $running)) { ?>
                             <td colspan="2">...updating</td>
                         <?php } else { ?>
                             <td><?php if (isset($isLocal[$input])) { ?>
@@ -35,5 +36,29 @@
                 <?php } ?>
             </table>
         <?php } ?>
+        <script type="text/javascript">
+            function call() {
+                $.ajax({
+                    type: 'GET',
+                    url: 'api.php',
+                    success: function (r) {
+                        if (r.reload){
+                            location.reload();
+                        }
+                    },
+                    failure: function (bad) {
+                        console.log(bad);
+                    }
+                });
+            }
+
+
+            $(document).ready(function () {
+                call();
+                setInterval(function () {
+                    call();
+                }, 10000);
+            });
+        </script>
     </body>
 </html>
