@@ -12,12 +12,12 @@ foreach ($procInDb as $pid => $site) {
     if (in_array($pid, $procRun)) {
         $data['running'][] = $site;
     } else {
-        $site = new Site($site);
+        $s = new Site($site);
         if (file_exists(BASE_PATH . $site)) {
-            $site->migrateWp();
-            $site->cleanFiles();
+            $s->migrateWp();
+            $s->cleanFiles();
         }
-        $site->removeProcessRunning($pid);
+        $s->removeProcessRunning($pid);
         $data['reload'] = true;
     }
 }

@@ -21,8 +21,12 @@ if (isset($_GET['f'])) {
         default:
             break;
     }
-    sleep(5);
-    header("Location: index.php");
+    if ($r['code'] != 0) {
+        echo $r['output'];
+    } else {
+        sleep(5);
+        header("Location: index.php");
+    }
 }
 $data['site'] = array();
 $p = new ProcessManager();

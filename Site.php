@@ -117,7 +117,8 @@ VALUES
             $res = $this->svnCli->checkout();
             $this->insertProcessRunning($this->name, $res['pid']);
         } else {
-            echo $this->dbClone->errormsg;
+            $res['code']=-1;
+            $res['output']=$this->dbClone->errormsg;
         }
         return $res;
     }
